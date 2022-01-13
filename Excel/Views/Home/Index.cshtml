@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@model Excel.Models.FormulasViewModel
+
+<div class="tab-content">
+    <h1>Введите данные для расчёта оптимальной толщины тепловой изоляции плоской стенки</h1>
+    <form action="/Home/Index" method="post">
+        <div class="row d-flex align-items-end pt-1 pb-5">
+            <h4>Коэффициент теплопроводности, Вт/(м*°C):</h4>
+            <div class="col-3 col-md">
+                <label for="">материала огнеупорной стенки, (λогн)</label>
+                <input type="text" id="" class="form-control" name="AlfaOgn" value="@Model.AlfaOgn" required />
+            </div>
+            <div class="col-3 col-md">
+                <label for="">1-го материала изоляции, (λ1)</label>
+                <input type="text" id="" class="form-control" name="Alfa1" value="@Model.Alfa1" required />
+            </div>
+            <div class="col-3 col-md">
+                <label for="">2-го материала изоляции, (λ2)</label>
+                <input type="text" id="" class="form-control" name="Alfa2" value="@Model.Alfa2" required />
+            </div>
+            <h4>Стоимость материала изоляции, усл.ед./м2:</h4>
+            <div class="col-3 col-md">
+                <label for="">1-го материала (С1)</label>
+                <input type="text" id="" class="form-control" name="C1" value="@Model.C1" required />
+            </div>
+            <div class="col-4 col-md">
+                <label for="">2-го материала (С2)</label>
+                <input type="text" id="" class="form-control" name="C2" value="@Model.C2" required />
+            </div>
+            <div class="col-4 col-md">
+                <label for="">Суммарная толщина изоляции, м (X0)</label>
+                <input type="text" id="" class="form-control" name="X0" value="@Model.X0" required />
+            </div>
+            <h4>Температура, °С:</h4>
+            <div class="col-4 col-md">
+                <label for="">рабочей среды в печи, (t')</label>
+                <input type="text" id="" class="form-control" name="t1" value="@Model.t1" required />
+            </div>
+            <div class="col-4 col-md">
+                <label for="">окружающей среды, (t'')</label>
+                <input type="text" id="" class="form-control" name="t2" value="@Model.t2" required />
+            </div>
+            <div class="col-4 col-md">
+                <label for="">наружной поверхности, (tНПmax)</label>
+                <input type="text" id="" class="form-control" name="tmax" value="@Model.tmax" required />
+            </div>
+            <h4>Коэффициент теплоотдачи, Вт/(м2*°С):</h4>
+            <div class="col-4 col-md">
+                <label for="">внутренний, (αраб)</label>
+                <input type="text" id="" class="form-control" name="AlfaRab" value="@Model.AlfaRab" required />
+            </div>
+            <div class="col-4 col-md">
+                <label for="">наружный, (αнар)</label>
+                <input type="text" id="" class="form-control" name="AlfaNar" value="@Model.AlfaNar" required />
+            </div>
+            <div class="col-4 col-md">
+                <label for="">Толщина огнеупорной стенки, м</label>
+                <input type="text" id="" class="form-control" name="Tolsh" value="@Model.Tolsh" required />
+            </div>
+        </div>
+        <hr />
+        <button class="btn btn-primary" id="#Egorushka" type="submit">Посчитать</button>
+        <hr />
+        @{
+            if (Model.isShow == true)
+            {
+                <h3>Результаты расчёта</h3>
+                <div class="col-4 col-md" id="result">
+                    <label>Толщина слоя x1: @Model.x1</label>
+                    <br />
+                    <label>Толщина слоя x2: @Model.x2</label>
+                    <br />
+                    <label>Сумма толщин слоёв x1 и x2: @Model.Sum</label>
+                    <br />
+                    <label>Суммарная стоимость изоляции (целевая функция), у.е.: @Model.CelFunc</label>
+                    <br />
+                    <label>Ограничение на температуру наружной стенки: @Model.Ogran</label>
+                    <div id="container" style="width: 500px; height: 400px; margin-top: 20px;"></div>
+                </div>
+            }
+        }
+
+
+    </form>
+</div>
+
+
